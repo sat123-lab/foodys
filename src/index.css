@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Foody's Editorial Spice Design System
+   Warm saffron / terracotta / charcoal palette.
+   All colors HSL.
+*/
+
+@layer base {
+  :root {
+    /* Warm cream paper background */
+    --background: 36 38% 96%;
+    --foreground: 24 18% 12%;
+
+    --card: 36 38% 98%;
+    --card-foreground: 24 18% 12%;
+
+    --popover: 36 38% 98%;
+    --popover-foreground: 24 18% 12%;
+
+    /* Saffron gold — primary brand */
+    --primary: 28 88% 52%;
+    --primary-foreground: 36 38% 98%;
+
+    /* Terracotta — secondary accent */
+    --secondary: 14 72% 46%;
+    --secondary-foreground: 36 38% 98%;
+
+    /* Deep charcoal cocoa */
+    --ink: 22 26% 9%;
+    --ink-foreground: 36 38% 96%;
+
+    /* Cardamom green accent */
+    --accent: 96 22% 32%;
+    --accent-foreground: 36 38% 98%;
+
+    --muted: 32 22% 90%;
+    --muted-foreground: 24 12% 38%;
+
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 36 38% 98%;
+
+    --border: 28 22% 86%;
+    --input: 28 22% 86%;
+    --ring: 28 88% 52%;
+
+    --radius: 0.25rem;
+
+    /* Brand-specific tokens */
+    --saffron: 38 92% 56%;
+    --turmeric: 44 96% 54%;
+    --chili: 8 78% 50%;
+    --terracotta: 14 72% 46%;
+    --cardamom: 96 22% 32%;
+    --cream: 36 50% 94%;
+    --paper: 36 38% 96%;
+
+    /* Gradients */
+    --gradient-spice: linear-gradient(135deg, hsl(var(--saffron)) 0%, hsl(var(--terracotta)) 50%, hsl(var(--chili)) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(36 50% 97%) 0%, hsl(32 38% 92%) 100%);
+    --gradient-ink: linear-gradient(180deg, hsl(22 26% 9%) 0%, hsl(14 30% 14%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsl(22 26% 9% / 0.1) 0%, hsl(22 26% 9% / 0.85) 100%);
+
+    /* Shadows */
+    --shadow-warm: 0 30px 60px -20px hsl(14 72% 46% / 0.25);
+    --shadow-ink: 0 40px 80px -20px hsl(22 26% 9% / 0.4);
+    --shadow-soft: 0 8px 24px -8px hsl(24 18% 12% / 0.12);
+
+    /* Easing */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+    --sidebar-background: 36 38% 96%;
+    --sidebar-foreground: 24 18% 12%;
+    --sidebar-primary: 28 88% 52%;
+    --sidebar-primary-foreground: 36 38% 98%;
+    --sidebar-accent: 32 22% 90%;
+    --sidebar-accent-foreground: 24 18% 12%;
+    --sidebar-border: 28 22% 86%;
+    --sidebar-ring: 28 88% 52%;
+  }
+
+  .dark {
+    --background: 22 26% 9%;
+    --foreground: 36 38% 96%;
+    --card: 22 26% 11%;
+    --card-foreground: 36 38% 96%;
+    --popover: 22 26% 11%;
+    --popover-foreground: 36 38% 96%;
+    --primary: 38 92% 56%;
+    --primary-foreground: 22 26% 9%;
+    --secondary: 14 72% 46%;
+    --secondary-foreground: 36 38% 96%;
+    --muted: 22 18% 18%;
+    --muted-foreground: 32 14% 65%;
+    --accent: 96 22% 32%;
+    --accent-foreground: 36 38% 96%;
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 36 38% 96%;
+    --border: 22 18% 20%;
+    --input: 22 18% 20%;
+    --ring: 38 92% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: hsl(var(--saffron) / 0.4);
+    color: hsl(var(--ink));
+  }
+}
+
+@layer utilities {
+  .font-serif-display {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'opsz' 144;
+  }
+  .font-serif {
+    font-family: 'Fraunces', serif;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-gradient-spice {
+    background: var(--gradient-spice);
+  }
+  .bg-gradient-warm {
+    background: var(--gradient-warm);
+  }
+  .bg-gradient-ink {
+    background: var(--gradient-ink);
+  }
+  .bg-gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+  .shadow-warm {
+    box-shadow: var(--shadow-warm);
+  }
+  .shadow-ink {
+    box-shadow: var(--shadow-ink);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .text-stroke {
+    -webkit-text-stroke: 1px hsl(var(--ink));
+    color: transparent;
+  }
+}
+
+/* Custom keyframes */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-marquee { animation: marquee 40s linear infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-reveal-up { animation: reveal-up 0.8s var(--ease-out-expo) forwards; }
