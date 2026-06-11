@@ -1,0 +1,14 @@
+{
+  "name": "Foody's — Flavours of India for Travellers",
+  "short_name": "Foody's",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "theme_color": "#3da35d",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
