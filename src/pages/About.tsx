@@ -169,12 +169,12 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.7, delay: (i % 2) * 0.1 }}
-                  className="flex gap-8 items-start p-8 rounded-2xl bg-foody-gray/60 hover:bg-foody-gray transition-colors"
+                  className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start p-6 sm:p-8 rounded-2xl bg-foody-gray/60 hover:bg-foody-gray transition-colors"
                 >
-                  <div className="size-36 md:size-40 shrink-0 overflow-hidden rounded-2xl shadow-md">
+                  <div className="size-32 sm:size-36 md:size-40 shrink-0 overflow-hidden rounded-2xl shadow-md">
                     <img src={t.img} alt={t.name} className="w-full h-full object-cover object-top" loading="lazy" />
                   </div>
-                  <div>
+                  <div className="text-center sm:text-left w-full min-w-0">
                     <h4 className="text-xl font-bold mb-1">{t.name}</h4>
                     <p className="text-sm text-foody-green font-medium mb-3">{t.role}</p>
                     <p className="text-muted-foreground text-sm leading-relaxed">{t.bio}</p>
@@ -208,12 +208,12 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="border-t border-white/20 pt-8"
+                className="pt-2"
               >
                 <p className="text-white/60 text-sm tracking-[0.25em] uppercase mb-4">
                   0{i + 1}
                 </p>
-                <h3 className="text-2xl font-bold mb-4 text-foody-red underline decoration-foody-red underline-offset-4">
+                <h3 className="text-2xl font-bold mb-4 text-foody-red">
                   {v.t}
                 </h3>
                 <p className="text-white/70 text-base leading-relaxed">{v.d}</p>

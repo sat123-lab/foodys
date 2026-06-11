@@ -31,7 +31,7 @@ export const PartnersSection = () => (
       </motion.div>
     </div>
 
-    <div className="relative overflow-hidden w-full">
+    <div className="relative overflow-hidden w-full max-w-full">
       <div className="flex w-max flex-nowrap animate-marquee">
         {[...partners, ...partners].map((p, i) => (
           <div

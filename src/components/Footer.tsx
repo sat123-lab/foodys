@@ -7,7 +7,7 @@ export const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="bg-[#1a1a1a] text-white">
+    <footer className="bg-[#1a1a1a] text-white [&_a]:no-underline">
       <div className="container py-10 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-6 mb-8">
           <div className="col-span-2 md:col-span-4">
@@ -18,7 +18,7 @@ export const Footer = () => {
             </p>
           </div>
 
-          <div className="col-span-1 md:col-span-2">
+          <div className="hidden md:block md:col-span-2">
             <h4 className="font-semibold text-sm mb-3">Company</h4>
             <ul className="space-y-2 text-white/60 text-xs">
               <li><Link to="/" className="hover:text-foody-green transition-colors">Home</Link></li>
@@ -29,7 +29,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-span-1 md:col-span-3">
+          <div className="hidden md:block md:col-span-3">
             <h4 className="font-semibold text-sm mb-3">Our Verticals</h4>
             <ul className="space-y-2 text-white/60 text-xs">
               <li><Link to="/verticals#airports" className="hover:text-foody-green transition-colors">Foody's at Airports</Link></li>
@@ -48,7 +48,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-span-2 md:col-span-3">
+          <div className="hidden md:block md:col-span-3">
             <h4 className="font-semibold text-sm mb-3">Contact</h4>
             <p className="text-white/70 font-medium text-xs mb-1">{contactInfo.company}</p>
             <address className="not-italic text-white/55 leading-relaxed text-xs mb-3">
@@ -57,7 +57,7 @@ export const Footer = () => {
             </address>
             <a
               href={`mailto:${contactInfo.email}`}
-              className="text-foody-green hover:underline text-xs block"
+              className="text-foody-green no-underline hover:text-white transition-colors text-xs block"
             >
               {contactInfo.email}
             </a>
@@ -74,14 +74,14 @@ export const Footer = () => {
           <div className="space-y-1">
             <p>© Copyright {new Date().getFullYear()} foodys.com. All rights reserved.</p>
             <p>
-              Andhra Dosa Co. ; Designed By{" "}
+              Designed By{" "}
               <a
-                href="https://blazeagency.in"
+                href="https://blazeagency.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foody-green hover:underline"
+                className="text-foody-green hover:text-white transition-colors"
               >
-                blazeagency.in
+                Blaze the Entity
               </a>
             </p>
           </div>

@@ -319,22 +319,17 @@ export const BlogSection = () => (
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12"
+        className="mb-12"
       >
-        <div>
-          <h2 className="section-title mb-2">From our blog</h2>
-          <p className="section-subtitle">Latest news & events</p>
-        </div>
-        <Link to="/about" className="text-foody-red font-medium hover:underline">
-          More articles
-        </Link>
+        <h2 className="section-title mb-2">From our blog</h2>
+        <p className="section-subtitle">Latest news & events</p>
       </motion.div>
 
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          { title: "Food For Travel", date: "March 2025" },
-          { title: "Indian Cuisine Excellence", date: "February 2025" },
-          { title: "Partner Spotlight", date: "January 2025" },
+          { title: "Food For Travel", date: "March 2025", image: "/images/blog-food-for-travel.png" },
+          { title: "Indian Cuisine Excellence", date: "February 2025", image: "/images/blog-indian-cuisine.png" },
+          { title: "Partner Spotlight", date: "January 2025", image: "/images/blog-partner-spotlight.png" },
         ].map((post, i) => (
           <motion.article
             key={post.title}
@@ -344,7 +339,14 @@ export const BlogSection = () => (
             transition={{ delay: i * 0.1 }}
             className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer"
           >
-            <div className="aspect-video bg-foody-green/20 group-hover:bg-foody-green/30 transition-colors" />
+            <div className="aspect-video overflow-hidden bg-foody-gray">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
             <div className="p-6">
               <p className="text-xs text-muted-foreground mb-2">{post.date}</p>
               <h4 className="font-bold text-lg group-hover:text-foody-green transition-colors">{post.title}</h4>

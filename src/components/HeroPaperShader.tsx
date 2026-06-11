@@ -10,13 +10,14 @@ export const HeroPaperShader = () => (
       swirl={0.55}
       grainMixer={0}
       grainOverlay={0}
-      scale={1.1}
+      scale={1}
       fit="cover"
       style={{
         width: "100%",
         height: "100%",
         position: "absolute",
         inset: 0,
+        maxWidth: "100%",
       }}
     />
 
@@ -25,31 +26,31 @@ export const HeroPaperShader = () => (
       <div
         className="absolute rounded-full blur-3xl animate-[float-blob-1_8s_ease-in-out_infinite]"
         style={{
-          width: "45vw",
-          height: "45vw",
+          width: "min(45vw, 280px)",
+          height: "min(45vw, 280px)",
           background: "radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%)",
           top: "10%",
-          left: "55%",
+          left: "45%",
         }}
       />
       <div
         className="absolute rounded-full blur-3xl animate-[float-blob-2_10s_ease-in-out_infinite]"
         style={{
-          width: "40vw",
-          height: "40vw",
+          width: "min(40vw, 240px)",
+          height: "min(40vw, 240px)",
           background: "radial-gradient(circle, rgba(142,245,180,0.5) 0%, transparent 70%)",
           bottom: "5%",
-          left: "10%",
+          left: "5%",
         }}
       />
       <div
         className="absolute rounded-full blur-3xl animate-[float-blob-3_12s_ease-in-out_infinite]"
         style={{
-          width: "35vw",
-          height: "35vw",
+          width: "min(35vw, 200px)",
+          height: "min(35vw, 200px)",
           background: "radial-gradient(circle, rgba(62,180,117,0.6) 0%, transparent 70%)",
           top: "40%",
-          right: "-5%",
+          right: "0",
         }}
       />
     </div>

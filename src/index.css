@@ -64,11 +64,18 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'IBM Plex Serif', Georgia, serif;
     font-weight: 400;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  #root {
+    overflow-x: hidden;
+    max-width: 100%;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', system-ui, sans-serif;

@@ -96,7 +96,7 @@ export const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-0 left-0 right-0 z-50 w-full max-w-full overflow-x-hidden"
       >
         <motion.div
           animate={{
@@ -196,7 +196,7 @@ export const Navbar = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             onClick={() => setContactPopupOpen(true)}
-            className="hidden lg:inline-flex btn-foody !px-6 !py-2.5 text-sm shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="!hidden lg:!inline-flex btn-foody !px-6 !py-2.5 text-sm shadow-md hover:shadow-lg transition-shadow duration-300"
           >
             Contact us
           </motion.button>

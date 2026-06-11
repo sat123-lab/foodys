@@ -66,17 +66,17 @@ export const Hero = () => {
   }, [emblaApi]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen w-full max-w-full overflow-x-clip overflow-hidden">
       <HeroPaperShader />
-      <div ref={emblaRef} className="relative z-10 overflow-hidden min-h-screen">
-        <div className="flex">
+      <div ref={emblaRef} className="relative z-10 w-full max-w-full overflow-hidden min-h-screen">
+        <div className="flex touch-pan-y">
           {slides.map((slide, index) => (
-            <div key={index} className="flex-[0_0_100%] min-w-0 min-h-screen">
-              <div className="container relative min-h-screen flex items-center pt-28 pb-32 md:pt-32">
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+            <div key={index} className="relative shrink-0 grow-0 basis-full min-w-0 w-full max-w-full min-h-screen">
+              <div className="container relative min-h-screen flex items-center pt-28 pb-32 md:pt-32 overflow-hidden">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full min-w-0">
                   <motion.div
-                    initial={{ opacity: 0, x: -40 }}
-                    animate={selectedIndex === index ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={selectedIndex === index ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="text-white z-10"
                   >
@@ -107,9 +107,9 @@ export const Hero = () => {
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={selectedIndex === index ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative flex justify-center lg:justify-end"
+                    className="relative flex justify-center lg:justify-end w-full min-w-0 max-w-full"
                   >
-                    <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px]">
+                    <div className="relative w-[min(280px,78vw)] aspect-square sm:w-[340px] md:w-[420px] lg:w-[480px]">
                       <div className="absolute inset-0 rounded-full bg-white shadow-[0_24px_80px_rgba(0,0,0,0.12),0_8px_32px_rgba(255,255,255,0.15)] ring-4 ring-white/20 flex items-center justify-center overflow-hidden">
                         <img
                           src={slide.image}
