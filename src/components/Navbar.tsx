@@ -96,7 +96,7 @@ export const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full max-w-full overflow-x-hidden"
+        className="fixed top-0 left-0 right-0 z-50 w-full max-w-full overflow-visible"
       >
         <motion.div
           animate={{
@@ -104,10 +104,10 @@ export const Navbar = () => {
             paddingBottom: scrolled ? 10 : 14,
           }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
+          className="relative overflow-visible"
         >
           <motion.div
-            className="absolute inset-0 -z-10 border-b"
+            className="absolute inset-0 -z-10 border-b pointer-events-none"
             animate={{
               backgroundColor: lightNav
                 ? "rgba(255, 255, 255, 0)"
@@ -130,9 +130,9 @@ export const Navbar = () => {
             <Logo />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav className="hidden lg:flex items-center gap-0.5 overflow-visible">
             {links.map((l) => (
-              <div key={l.to} className="relative group">
+              <div key={l.to} className="relative group overflow-visible">
                 <NavLink
                   to={l.to}
                   end={l.to === "/"}
@@ -166,24 +166,19 @@ export const Navbar = () => {
                 </NavLink>
 
                 {l.children && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-3 scale-95 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-[60] pointer-events-none group-hover:pointer-events-auto">
-                    <div
-                      className={`min-w-[280px] rounded-2xl overflow-hidden border ${
-                        lightNav
-                          ? "bg-white border-white/90 shadow-[0_24px_64px_rgba(0,0,0,0.28),0_0_0_1px_rgba(0,0,0,0.06)]"
-                          : "bg-white border-border/80 shadow-[0_16px_48px_rgba(0,0,0,0.14)]"
-                      }`}
-                    >
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-[100] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out pointer-events-none group-hover:pointer-events-auto">
+                    <div className="min-w-[280px] rounded-2xl overflow-hidden border bg-white border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
                       <div className="h-1.5 w-full bg-gradient-to-r from-foody-green to-foody-green-dark" />
-                      <div className="py-2.5 bg-white">
+                      <ul className="py-2 bg-white">
                         {l.children.map((c) => (
-                          <NavChildLink
-                            key={c.to + c.label}
-                            child={c}
-                            className="block px-5 py-3 text-sm font-medium text-gray-900 hover:bg-foody-gray hover:text-foody-green-dark transition-colors duration-200"
-                          />
+                          <li key={c.to + c.label}>
+                            <NavChildLink
+                              child={c}
+                              className="block px-5 py-3 text-sm font-semibold text-[#1a1a1a] hover:bg-foody-gray hover:text-foody-green-dark transition-colors duration-200"
+                            />
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
                   </div>
                 )}
