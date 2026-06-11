@@ -5,6 +5,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { WaveBackground } from "@/components/WaveBackground";
 import { HeroPaperShader } from "@/components/HeroPaperShader";
+import bannerSlide2 from "@/assets/Homeimages/banner new 1 revamp.png";
+import bannerSlide3 from "@/assets/Homeimages/new banner 2 revamp image.png";
+import bannerSlide4 from "@/assets/Homeimages/banner revamp pt 3 image.png";
 
 const slides = [
   {
@@ -20,7 +23,7 @@ const slides = [
     subtitle: "",
     cta: "Discover more",
     ctaLink: "/about",
-    image: "/images/banner2.png",
+    image: bannerSlide2,
     secondaryLink: { label: "About our company", to: "/about" },
   },
   {
@@ -28,7 +31,7 @@ const slides = [
     subtitle: "Airports. Highways. Metros.",
     cta: "Explore",
     ctaLink: "/verticals",
-    image: "/images/banner-new1.png",
+    image: bannerSlide3,
     secondaryLink: { label: "About our company", to: "/about" },
   },
   {
@@ -36,7 +39,7 @@ const slides = [
     subtitle: "Airports. Highways. Metros.",
     cta: "Explore",
     ctaLink: "/verticals",
-    image: "/images/truck-new.png",
+    image: bannerSlide4,
     secondaryLink: { label: "About our company", to: "/about" },
   },
 ];

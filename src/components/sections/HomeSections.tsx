@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import adcImage from "@/assets/adc-storefront.jpg";
+import adcImage from "@/assets/adc-brand.jpg";
 
 const partners = [
   { name: "SKC", logo: "/images/skc.png" },
@@ -75,7 +75,7 @@ const verticals: VerticalCard[] = [
     link: "/verticals#metros",
   },
   {
-    title: "ADC",
+    title: "Andhra Dosa Co.",
     image: adcImage,
     link: "https://andhradosaco.com/",
     external: true,

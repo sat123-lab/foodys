@@ -81,48 +81,71 @@ export const CtaDualSection = () => (
       initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      className="bg-foody-green text-white py-16 md:py-20 px-8 md:px-12 lg:px-16"
+      className="bg-foody-green text-white flex items-center py-16 md:py-20 px-8 md:px-14 lg:px-20"
     >
-      <h3 className="text-2xl md:text-3xl font-bold mb-4">Hey Foodies! Craving delicious bites</h3>
-      <p className="text-white/80 mb-8 max-w-md">
-        Speak to us for the best travel-friendly food recommendations and flavors
-      </p>
-      <p className="text-sm text-white/70 mb-1">Hyderabad:</p>
-      <a
-        href={`tel:${contactInfo.bulkOrders[0].tel}`}
-        className="text-2xl md:text-3xl font-bold mb-2 block hover:text-white/90 transition-colors"
-      >
-        {contactInfo.bulkOrders[0].phone}
-      </a>
-      <p className="text-sm text-white/70 mb-8">{contactInfo.bulkOrders[0].email}</p>
-      <Link to="/contact" className="btn-foody inline-flex items-center gap-2">
-        <Phone className="size-4" />
-        Speak to us
-      </Link>
+      <div className="max-w-md w-full mx-auto md:mx-0">
+        <h3 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">
+          Hey Foodies! Craving delicious bites
+        </h3>
+        <p className="text-white/80 mb-8 leading-relaxed">
+          Speak to us for the best travel-friendly food recommendations and flavors
+        </p>
+        <div className="mb-8">
+          <p className="text-sm text-white/70 mb-1">Hyderabad:</p>
+          <a
+            href={`tel:${contactInfo.bulkOrders[0].tel}`}
+            className="text-2xl md:text-3xl font-bold block hover:text-white/90 transition-colors"
+          >
+            {contactInfo.bulkOrders[0].phone}
+          </a>
+          <a
+            href={`mailto:${contactInfo.bulkOrders[0].email}`}
+            className="text-sm text-white/70 mt-1 block hover:text-white transition-colors"
+          >
+            {contactInfo.bulkOrders[0].email}
+          </a>
+        </div>
+        <Link to="/contact" className="btn-foody inline-flex items-center gap-2">
+          <Phone className="size-4" />
+          Speak to us
+        </Link>
+      </div>
     </motion.div>
 
     <motion.div
       initial={{ opacity: 0, x: 30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      className="bg-foody-red text-white py-16 md:py-20 px-8 md:px-12 lg:px-16"
+      className="bg-foody-red text-white flex items-center py-16 md:py-20 px-8 md:px-14 lg:px-20"
     >
-      <h3 className="text-2xl md:text-3xl font-bold mb-4">Are you a Foody?</h3>
-      <p className="text-white/80 mb-8 max-w-md">
-        Join our network of partners and bring iconic flavours to travellers everywhere.
-      </p>
-      <p className="text-sm text-white/70 mb-1">Mumbai:</p>
-      <a
-        href={`tel:${contactInfo.bulkOrders[1].tel}`}
-        className="text-2xl md:text-3xl font-bold mb-2 block hover:text-white/90 transition-colors"
-      >
-        {contactInfo.bulkOrders[1].phone}
-      </a>
-      <p className="text-sm text-white/70 mb-8">{contactInfo.bulkOrders[1].email}</p>
-      <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-medium bg-foody-green text-white hover:bg-foody-green-dark transition-all duration-300 hover:-translate-y-0.5 shadow-lg">
-        <Phone className="size-4" />
-        Speak to us
-      </Link>
+      <div className="max-w-md w-full mx-auto md:mx-0">
+        <h3 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">Are you a Foody?</h3>
+        <p className="text-white/80 mb-8 leading-relaxed">
+          Join our network of partners and bring iconic flavours to travellers everywhere.
+        </p>
+        <div className="mb-8">
+          <p className="text-sm text-white/70 mb-1">Mumbai:</p>
+          <a
+            href={`tel:${contactInfo.bulkOrders[1].tel}`}
+            className="text-2xl md:text-3xl font-bold block hover:text-white/90 transition-colors"
+          >
+            {contactInfo.bulkOrders[1].phone}
+          </a>
+          <a
+            href={`mailto:${contactInfo.bulkOrders[1].email}`}
+            className="text-sm text-white/70 mt-1 block hover:text-white transition-colors"
+          >
+            {contactInfo.bulkOrders[1].email}
+          </a>
+        </div>
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-medium bg-foody-green text-white hover:bg-foody-green-dark transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
+        >
+          <Phone className="size-4" />
+          Speak to us
+        </Link>
+      </div>
     </motion.div>
   </section>
 );

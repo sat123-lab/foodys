@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { GrowthRoadmap } from "@/components/GrowthRoadmap";
 import storyImg from "@/assets/story-craft.jpg";
-import adcImage from "@/assets/adc-storefront.jpg";
+import adcImage from "@/assets/adc-brand.jpg";
 import founder from "@/assets/team/founder-Mr.-Khan.jpg";
 import venkatesh from "@/assets/team/P-Venkatesh-1.jpg";
 import salim from "@/assets/team/Salim-Sheikh-1.jpg";
@@ -120,12 +120,12 @@ const About = () => {
               transition={{ duration: 0.9 }}
               className="md:col-span-4 max-w-xs mx-auto md:mx-0 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg"
             >
-              <img src={founder} alt="Mr. Khan, Founder of Foody's" className="w-full h-full object-cover object-top" loading="lazy" />
+              <img src={founder} alt="Mohammed Naeemuddin Khan, Founder of Foody's" className="w-full h-full object-cover object-top" loading="lazy" />
             </motion.div>
             <div className="md:col-span-8">
               <p className="text-xs uppercase tracking-[0.3em] text-foody-red mb-4 font-medium">Founder's Story</p>
               <h3 className="text-2xl md:text-3xl font-bold leading-tight mb-2">
-                Mr. Khan
+                Mohammed Naeemuddin Khan
               </h3>
               <p className="text-sm text-foody-green font-medium mb-6">Founder, Foody's</p>
               <p className="text-muted-foreground leading-relaxed mb-4">
@@ -213,8 +213,10 @@ const About = () => {
                 <p className="text-white/60 text-sm tracking-[0.25em] uppercase mb-4">
                   0{i + 1}
                 </p>
-                <h3 className="text-2xl font-bold mb-4">{v.t}</h3>
-                <p className="text-white/70 leading-relaxed">{v.d}</p>
+                <h3 className="text-2xl font-bold mb-4 text-foody-red underline decoration-foody-red underline-offset-4">
+                  {v.t}
+                </h3>
+                <p className="text-white/70 text-base leading-relaxed">{v.d}</p>
               </motion.div>
             ))}
           </div>
@@ -236,14 +238,14 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
               Andhra Dosa <span className="text-foody-green">Company</span>
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-5">
+            <p className="text-muted-foreground text-base leading-relaxed mb-5">
               Andhra Dosa Company is powered by Foody's, one of India's growing food and
               hospitality brands focused on delivering authentic regional cuisine at scale.
               Created to celebrate the rich flavours of Andhra and South Indian cooking,
               Andhra Dosa Company combines time-honoured recipes with modern food service
               standards to ensure every meal is fresh, consistent, and full of flavour.
             </p>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-muted-foreground text-base leading-relaxed mb-6">
               While Andhra Dosa Company has its own identity and culinary focus, it shares
               Foody's larger vision of bringing India's most loved regional foods closer to
               people. Together, we are building destinations where authenticity meets
@@ -256,7 +258,7 @@ const About = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-foody-red font-medium hover:underline"
             >
-              Visit Andhra Dosa Co. →
+              Learn More about Andhra Dosa Co.
             </a>
           </motion.div>
           <motion.div

@@ -64,7 +64,7 @@ const links: NavItem[] = [
       { to: "/verticals#airports", label: "Foody's at Airports" },
       { to: "/verticals#highways", label: "Foody's at Highways" },
       { to: "/verticals#metros", label: "Foody's at Metros" },
-      { to: "https://andhradosaco.com/", label: "AndhraDosaCo(ADC)", external: true },
+      { to: "https://andhradosaco.com/", label: "Andhra Dosa Co.", external: true },
     ],
   },
 ];
@@ -166,15 +166,21 @@ export const Navbar = () => {
                 </NavLink>
 
                 {l.children && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible translate-y-3 scale-95 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 pointer-events-none group-hover:pointer-events-auto">
-                    <div className="min-w-[260px] rounded-2xl bg-white/98 border border-border/60 shadow-[0_16px_40px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-xl">
-                      <div className="h-1 w-full bg-gradient-to-r from-foody-green to-foody-green/60" />
-                      <div className="py-2">
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-3 scale-95 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-[60] pointer-events-none group-hover:pointer-events-auto">
+                    <div
+                      className={`min-w-[280px] rounded-2xl overflow-hidden border ${
+                        lightNav
+                          ? "bg-white border-white/90 shadow-[0_24px_64px_rgba(0,0,0,0.28),0_0_0_1px_rgba(0,0,0,0.06)]"
+                          : "bg-white border-border/80 shadow-[0_16px_48px_rgba(0,0,0,0.14)]"
+                      }`}
+                    >
+                      <div className="h-1.5 w-full bg-gradient-to-r from-foody-green to-foody-green-dark" />
+                      <div className="py-2.5 bg-white">
                         {l.children.map((c) => (
                           <NavChildLink
                             key={c.to + c.label}
                             child={c}
-                            className="block px-5 py-2.5 text-sm text-foreground/80 hover:bg-foody-gray/80 hover:text-foody-green transition-all duration-300 ease-out"
+                            className="block px-5 py-3 text-sm font-medium text-gray-900 hover:bg-foody-gray hover:text-foody-green-dark transition-colors duration-200"
                           />
                         ))}
                       </div>

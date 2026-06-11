@@ -129,7 +129,7 @@ export const GrowthRoadmap = () => {
             <div className="absolute size-[200px] rounded-full border border-foody-green/10 bg-foody-green/5" />
 
             {/* Center */}
-            <div className="absolute z-10 flex flex-col items-center justify-center size-20 rounded-full bg-foody-green text-white shadow-lg">
+            <div className="absolute z-10 flex flex-col items-center justify-center size-20 rounded-full bg-foody-red text-white shadow-lg">
               <Rocket className="size-6 mb-1" />
               <span className="text-[10px] font-bold">FOODY'S</span>
             </div>
@@ -160,13 +160,9 @@ export const GrowthRoadmap = () => {
                     }`}
                   >
                     <div
-                      className={`size-12 md:size-14 rounded-full flex items-center justify-center border-2 transition-colors ${
-                        item.status === "completed"
-                          ? "bg-foody-green border-foody-green text-white"
-                          : item.status === "in-progress"
-                            ? "bg-white border-foody-green text-foody-green"
-                            : "bg-white/60 border-foody-green/40 text-foody-green/60"
-                      } ${isActive ? "ring-4 ring-foody-green/30 shadow-lg" : ""}`}
+                      className={`size-12 md:size-14 rounded-full flex items-center justify-center border-2 bg-foody-green border-foody-green text-white transition-colors ${
+                        isActive ? "ring-4 ring-foody-green/30 shadow-lg" : ""
+                      }`}
                     >
                       <Icon className="size-5" />
                     </div>

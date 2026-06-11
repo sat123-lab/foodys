@@ -5,8 +5,6 @@ import {
 } from "@/components/sections/HomeSections";
 import {
   CtaDualSection,
-  HowWeWorkSection,
-  QuoteSection,
   BlogSection,
 } from "@/components/sections/MoreSections";
 
@@ -16,8 +14,6 @@ const Index = () => (
     <PartnersSection />
     <WhereWeAreSection />
     <CtaDualSection />
-    <HowWeWorkSection />
-    <QuoteSection />
     <BlogSection />
   </>
 );

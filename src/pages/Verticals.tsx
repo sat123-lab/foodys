@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { CtaBanner } from "@/components/sections/CtaBanner";
 import airport from "@/assets/vertical-airport.jpg";
 import highway from "@/assets/vertical-highway.jpg";
 import metro from "@/assets/vertical-metro.jpg";
@@ -83,8 +82,6 @@ const Verticals = () => (
         </motion.article>
       ))}
     </section>
-
-    <CtaBanner />
   </>
 );
 

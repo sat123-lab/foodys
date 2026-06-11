@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { X, Phone, Mail } from "lucide-react";
+import { toast } from "sonner";
 import { contactInfo } from "@/data/contact";
 
 interface ContactPopupProps {
@@ -9,6 +10,19 @@ interface ContactPopupProps {
 }
 
 export const ContactPopup = ({ isOpen, onClose }: ContactPopupProps) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success("Thanks — we'll be in touch within 48 hours.");
+      (e.target as HTMLFormElement).reset();
+      onClose();
+    }, 800);
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -27,10 +41,10 @@ export const ContactPopup = ({ isOpen, onClose }: ContactPopupProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 24 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
           >
             <div
-              className="relative w-full max-w-3xl bg-white rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.15)] overflow-hidden"
+              className="relative w-full max-w-3xl bg-white rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.15)] overflow-hidden my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="h-1 w-full bg-gradient-to-r from-foody-green via-foody-green/80 to-foody-red/80" />
@@ -44,99 +58,106 @@ export const ContactPopup = ({ isOpen, onClose }: ContactPopupProps) => {
               </button>
 
               <div className="p-8 md:p-10">
-                <div className="text-center mb-8 md:mb-10 pr-8">
+                <div className="text-center mb-8 pr-8">
                   <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">
                     Get in Touch
                   </h2>
                   <p className="text-muted-foreground">Questions? Let's talk!</p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-5 mb-5">
-                  <div className="rounded-xl border border-border/60 bg-foody-gray/40 p-5">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="size-10 rounded-full bg-foody-red/10 flex items-center justify-center shrink-0">
-                        <Mail className="size-4 text-foody-red" />
-                      </div>
-                      <h3 className="font-bold text-sm uppercase tracking-wide">Mail</h3>
-                    </div>
-                    <a
-                      href={`mailto:${contactInfo.email}`}
-                      className="text-muted-foreground hover:text-foody-red transition-colors text-sm"
-                    >
-                      {contactInfo.email}
-                    </a>
-                  </div>
-
-                  <div className="rounded-xl border border-border/60 bg-foody-gray/40 p-5">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="size-10 rounded-full bg-foody-red/10 flex items-center justify-center shrink-0">
-                        <MapPin className="size-4 text-foody-red" />
-                      </div>
-                      <h3 className="font-bold text-sm uppercase tracking-wide">Corporate Office</h3>
-                    </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {contactInfo.company}
-                      <br />
-                      {contactInfo.address.line1}
-                      <br />
-                      {contactInfo.address.line2}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-xl border border-border/60 bg-foody-gray/40 p-5 mb-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="size-10 rounded-full bg-foody-red/10 flex items-center justify-center shrink-0">
-                      <MessageCircle className="size-4 text-foody-red" />
-                    </div>
-                    <h3 className="font-bold text-sm uppercase tracking-wide">Bulk Orders</h3>
-                  </div>
-                  <div className="grid sm:grid-cols-3 gap-4">
-                    {contactInfo.bulkOrders.map((office) => (
-                      <div
-                        key={office.city}
-                        className="rounded-lg bg-white border border-border/40 p-4"
+                <form onSubmit={onSubmit} className="space-y-5 mb-8">
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label
+                        htmlFor="contact-name"
+                        className="block text-xs uppercase tracking-wide text-muted-foreground mb-2 font-medium"
                       >
-                        <p className="font-semibold text-foreground text-sm mb-2">{office.city}</p>
-                        <a
-                          href={`mailto:${office.email}`}
-                          className="text-muted-foreground hover:text-foody-red transition-colors text-xs block mb-1"
-                        >
-                          {office.email}
-                        </a>
-                        <a
-                          href={`tel:${office.tel}`}
-                          className="text-muted-foreground hover:text-foody-red transition-colors text-xs block"
-                        >
-                          {office.phone}
-                        </a>
-                      </div>
-                    ))}
+                        Your name
+                      </label>
+                      <input
+                        id="contact-name"
+                        name="name"
+                        type="text"
+                        required
+                        className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-foody-green focus:ring-2 focus:ring-foody-green/20 transition-all"
+                        placeholder="Full name"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="contact-email"
+                        className="block text-xs uppercase tracking-wide text-muted-foreground mb-2 font-medium"
+                      >
+                        Email
+                      </label>
+                      <input
+                        id="contact-email"
+                        name="email"
+                        type="email"
+                        required
+                        className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-foody-green focus:ring-2 focus:ring-foody-green/20 transition-all"
+                        placeholder="you@email.com"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center border-t border-border pt-6">
+                  <div>
+                    <label
+                      htmlFor="contact-phone"
+                      className="block text-xs uppercase tracking-wide text-muted-foreground mb-2 font-medium"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      id="contact-phone"
+                      name="phone"
+                      type="tel"
+                      className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-foody-green focus:ring-2 focus:ring-foody-green/20 transition-all"
+                      placeholder="+91"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-xs uppercase tracking-wide text-muted-foreground mb-2 font-medium"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={4}
+                      required
+                      className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-foody-green focus:ring-2 focus:ring-foody-green/20 transition-all resize-none"
+                      placeholder="How can we help you?"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-foody-red text-white text-sm font-medium rounded-full hover:bg-foody-red-dark transition-colors disabled:opacity-60"
+                  >
+                    {submitting ? "Sending..." : "Send message"}
+                  </button>
+                </form>
+
+                <div className="border-t border-border pt-6 flex flex-col sm:flex-row flex-wrap gap-4 justify-center text-sm">
                   <a
                     href={`tel:${contactInfo.bulkOrders[0].tel}`}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foody-red text-white text-sm font-medium rounded-full hover:bg-foody-red-dark transition-colors"
+                    className="inline-flex items-center gap-2 text-muted-foreground hover:text-foody-red transition-colors"
                   >
                     <Phone className="size-4" />
-                    Call Us
+                    {contactInfo.bulkOrders[0].phone}
                   </a>
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foody-gray text-foreground text-sm font-medium rounded-full hover:bg-foody-green hover:text-white transition-colors"
+                    className="inline-flex items-center gap-2 text-muted-foreground hover:text-foody-red transition-colors"
                   >
                     <Mail className="size-4" />
-                    Email Us
+                    {contactInfo.email}
                   </a>
-                  <Link
-                    to="/contact"
-                    onClick={onClose}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 border border-border text-sm font-medium rounded-full hover:border-foody-green hover:text-foody-green transition-colors"
-                  >
-                    Full contact page
-                  </Link>
                 </div>
               </div>
             </div>

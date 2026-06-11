@@ -42,7 +42,7 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-foody-green transition-colors"
                 >
-                  AndhraDosaCo (ADC)
+                  Andhra Dosa Co.
                 </a>
               </li>
             </ul>
@@ -71,7 +71,20 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-[11px] text-white/40">
-          <p>© Copyright {new Date().getFullYear()} foodys.com. All rights reserved.</p>
+          <div className="space-y-1">
+            <p>© Copyright {new Date().getFullYear()} foodys.com. All rights reserved.</p>
+            <p>
+              Andhra Dosa Co. ; Designed By{" "}
+              <a
+                href="https://blazeagency.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foody-green hover:underline"
+              >
+                blazeagency.in
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-5">
             <a href="#" className="hover:text-foody-green transition-colors">Privacy policy</a>
             <button
