@@ -1,124 +1,156 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import spices from "@/assets/spices.jpg";
-import bgHome from "@/assets/bg-home.mp4.asset.json";
-import { VideoBackground } from "@/components/VideoBackground";
-import { RealisticFood } from "@/components/RealisticFood";
+import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { WaveBackground } from "@/components/WaveBackground";
+import { HeroPaperShader } from "@/components/HeroPaperShader";
+
+const slides = [
+  {
+    title: "Food For Travel",
+    subtitle: "Airports. Highways. Metros.",
+    cta: "Explore",
+    ctaLink: "/verticals",
+    image: "/images/banner-new1.png",
+    secondaryLink: null,
+  },
+  {
+    title: "Bringing you the best of Indian Cuisine",
+    subtitle: "",
+    cta: "Discover more",
+    ctaLink: "/about",
+    image: "/images/banner2.png",
+    secondaryLink: { label: "About our company", to: "/about" },
+  },
+  {
+    title: "Local iconic flavours where you least expect them",
+    subtitle: "Airports. Highways. Metros.",
+    cta: "Explore",
+    ctaLink: "/verticals",
+    image: "/images/banner-new1.png",
+    secondaryLink: { label: "About our company", to: "/about" },
+  },
+  {
+    title: "Served fresh through our smart proprietary logistics system",
+    subtitle: "Airports. Highways. Metros.",
+    cta: "Explore",
+    ctaLink: "/verticals",
+    image: "/images/truck-new.png",
+    secondaryLink: { label: "About our company", to: "/about" },
+  },
+];
 
 export const Hero = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const timer = setInterval(() => emblaApi.scrollNext(), 5000);
+    return () => clearInterval(timer);
+  }, [emblaApi]);
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden bg-paper">
-      <VideoBackground src={bgHome.url} overlayClassName="bg-paper/65" />
-      {/* Decorative spice circle */}
-      <motion.div
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
-        className="absolute -right-40 -top-40 size-[600px] rounded-full opacity-40 blur-3xl"
-      >
-        <div className="w-full h-full rounded-full bg-gradient-spice" />
-      </motion.div>
+    <section className="relative min-h-screen overflow-hidden">
+      <HeroPaperShader />
+      <div ref={emblaRef} className="relative z-10 overflow-hidden min-h-screen">
+        <div className="flex">
+          {slides.map((slide, index) => (
+            <div key={index} className="flex-[0_0_100%] min-w-0 min-h-screen">
+              <div className="container relative min-h-screen flex items-center pt-28 pb-32 md:pt-32">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+                  <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    animate={selectedIndex === index ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-white z-10"
+                  >
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-extrabold leading-[1.1] mb-4">
+                      {slide.title}
+                    </h1>
+                    {slide.subtitle && (
+                      <p className="text-lg md:text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
+                        {slide.subtitle}
+                      </p>
+                    )}
+                    <div className="flex flex-wrap items-center gap-4">
+                      <Link to={slide.ctaLink} className="btn-foody">
+                        {slide.cta}
+                      </Link>
+                      {slide.secondaryLink && (
+                        <Link
+                          to={slide.secondaryLink.to}
+                          className="text-white/90 text-sm hover:text-white underline underline-offset-4 transition-colors"
+                        >
+                          {slide.secondaryLink.label}
+                        </Link>
+                      )}
+                    </div>
+                  </motion.div>
 
-      <div className="container relative pt-24 pb-24 min-h-screen flex flex-col">
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="hidden md:flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-terracotta mb-12"
-        >
-          <span className="block w-12 h-px bg-terracotta" />
-          Food For Travel · Since 2014
-        </motion.div>
-
-        {/* Headline */}
-        <div className="grid md:grid-cols-12 gap-8 items-end flex-1">
-          <div className="md:col-span-7">
-            <h1 className="font-serif font-black text-[14vw] md:text-[10vw] leading-[0.85] tracking-tight">
-              {"Flavours".split("").map((c, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ y: 100, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.3 + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="inline-block"
-                >
-                  {c}
-                </motion.span>
-              ))}
-              <br />
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.9 }}
-                className="italic font-light text-stroke"
-              >
-                of India
-              </motion.span>
-              <motion.span
-                initial={{ scale: 0, rotate: -45 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
-                className="inline-block ml-4 text-terracotta"
-              >
-                .
-              </motion.span>
-            </h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
-              className="mt-3 flex flex-col sm:flex-row sm:items-center gap-6"
-            >
-              <Link
-                to="/verticals"
-                className="group inline-flex items-center gap-3 px-7 py-4 bg-ink text-ink-foreground hover:bg-terracotta transition-colors duration-300"
-              >
-                <span className="tracking-wide">Explore our verticals</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </Link>
-              <Link to="/about" className="text-sm tracking-wide underline underline-offset-4 decoration-terracotta hover:text-terracotta transition-colors">
-                About our company
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right column: realistic spinning thali, shifted up & right */}
-          <div className="md:col-span-5 relative min-h-[420px] md:min-h-[600px] md:-mt-16 md:-mr-10">
-            <RealisticFood hero className="absolute inset-0" />
-
-            {/* Floating spice chip kept for personality */}
-            <motion.div
-              animate={{ y: [0, -16, 0], rotate: [0, 3, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-6 -bottom-6 size-32 rounded-full overflow-hidden border-4 border-paper shadow-warm hidden md:block z-10"
-            >
-              <img src={spices} alt="" className="w-full h-full object-cover" loading="lazy" />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Marquee tagline at bottom */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.6 }}
-          className="mt-8 grid grid-cols-3 gap-8 max-w-2xl"
-        >
-          {[
-            { k: "Airports", v: "12+" },
-            { k: "Highways", v: "40+" },
-            { k: "Metros", v: "8+" },
-          ].map((s) => (
-            <div key={s.k}>
-              <p className="font-serif text-4xl md:text-5xl text-terracotta">{s.v}</p>
-              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mt-1">{s.k}</p>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={selectedIndex === index ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative flex justify-center lg:justify-end"
+                  >
+                    <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px]">
+                      <div className="absolute inset-0 rounded-full bg-white shadow-[0_24px_80px_rgba(0,0,0,0.12),0_8px_32px_rgba(255,255,255,0.15)] ring-4 ring-white/20 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={slide.image}
+                          alt=""
+                          className="w-[85%] h-[85%] object-contain"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
             </div>
           ))}
-        </motion.div>
+        </div>
+      </div>
+
+      <WaveBackground />
+
+      <button
+        onClick={scrollPrev}
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 size-10 md:size-12 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-105"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="size-6 md:size-7" />
+      </button>
+      <button
+        onClick={scrollNext}
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 size-10 md:size-12 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-105"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="size-6 md:size-7" />
+      </button>
+
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => emblaApi?.scrollTo(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === selectedIndex ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   );

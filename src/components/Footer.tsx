@@ -1,74 +1,87 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
+import { ArrowUp } from "lucide-react";
+import { contactInfo } from "@/data/contact";
 
 export const Footer = () => {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
-    <footer className="bg-ink text-ink-foreground grain">
-      <div className="container py-20">
-        <div className="grid md:grid-cols-12 gap-12 mb-16">
-          <div className="md:col-span-5">
-            <div className="bg-white inline-block p-3 rounded-md">
-              <Logo />
-            </div>
-            <p className="mt-6 text-white/60 max-w-md leading-relaxed">
+    <footer className="bg-[#1a1a1a] text-white">
+      <div className="container py-10 md:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-6 mb-8">
+          <div className="col-span-2 md:col-span-4">
+            <Logo size="footer" />
+            <p className="mt-4 text-white/55 max-w-xs leading-relaxed text-xs">
               A customer-centric brand that leverages technology to enhance your food
-              experience while you travel — bringing iconic local flavours to airports,
-              highways and metros.
+              experience while you travel.
             </p>
-            <div className="mt-8 flex gap-3">
-              {["IG", "LI", "FB", "YT"].map((s) => (
+          </div>
+
+          <div className="col-span-1 md:col-span-2">
+            <h4 className="font-semibold text-sm mb-3">Company</h4>
+            <ul className="space-y-2 text-white/60 text-xs">
+              <li><Link to="/" className="hover:text-foody-green transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-foody-green transition-colors">About Us</Link></li>
+              <li><Link to="/partners" className="hover:text-foody-green transition-colors">Our Partners</Link></li>
+              <li><Link to="/verticals" className="hover:text-foody-green transition-colors">Our Verticals</Link></li>
+              <li><Link to="/contact" className="hover:text-foody-green transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div className="col-span-1 md:col-span-3">
+            <h4 className="font-semibold text-sm mb-3">Our Verticals</h4>
+            <ul className="space-y-2 text-white/60 text-xs">
+              <li><Link to="/verticals#airports" className="hover:text-foody-green transition-colors">Foody's at Airports</Link></li>
+              <li><Link to="/verticals#highways" className="hover:text-foody-green transition-colors">Foody's at Highways</Link></li>
+              <li><Link to="/verticals#metros" className="hover:text-foody-green transition-colors">Foody's at Metros</Link></li>
+              <li>
                 <a
-                  key={s}
-                  href="#"
-                  className="size-10 grid place-items-center border border-white/15 text-xs tracking-wider hover:bg-saffron hover:text-ink hover:border-saffron transition-all"
+                  href="https://andhradosaco.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foody-green transition-colors"
                 >
-                  {s}
+                  AndhraDosaCo (ADC)
                 </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-saffron mb-5">Company</p>
-            <ul className="space-y-3 text-white/70">
-              <li><Link to="/" className="hover:text-saffron transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-saffron transition-colors">About Us</Link></li>
-              <li><Link to="/verticals" className="hover:text-saffron transition-colors">Our Verticals</Link></li>
-              <li><Link to="/contact" className="hover:text-saffron transition-colors">Contact</Link></li>
+              </li>
             </ul>
           </div>
 
-          <div className="md:col-span-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-saffron mb-5">Our Verticals</p>
-            <ul className="space-y-3 text-white/70">
-              <li><Link to="/verticals#airports" className="hover:text-saffron transition-colors">Foody's at Airports</Link></li>
-              <li><Link to="/verticals#highways" className="hover:text-saffron transition-colors">Foody's at Highways</Link></li>
-              <li><Link to="/verticals#metros" className="hover:text-saffron transition-colors">Foody's at Metros</Link></li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-saffron mb-5">Contact</p>
-            <p className="text-white/80 font-medium mb-2">Zoha Foods Private Limited</p>
-            <address className="not-italic text-white/60 leading-relaxed text-sm">
-              3rd Floor, Plot No. 55, Pragatinagar,<br />
-              Srinagar Colony, Hyderabad 500073
+          <div className="col-span-2 md:col-span-3">
+            <h4 className="font-semibold text-sm mb-3">Contact</h4>
+            <p className="text-white/70 font-medium text-xs mb-1">{contactInfo.company}</p>
+            <address className="not-italic text-white/55 leading-relaxed text-xs mb-3">
+              {contactInfo.address.line1}<br />
+              {contactInfo.address.line2}
             </address>
-            <a href="mailto:info@foodys.com" className="block mt-4 text-saffron hover:underline">
-              info@foodys.com
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="text-foody-green hover:underline text-xs block"
+            >
+              {contactInfo.email}
             </a>
+            <Link
+              to="/contact"
+              className="inline-block mt-2 text-white/50 hover:text-foody-green text-xs transition-colors"
+            >
+              Bulk orders &rarr;
+            </Link>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} foodys.com. All rights reserved.</p>
-          <a href="#" className="hover:text-saffron transition-colors">Privacy Policy</a>
-        </div>
-      </div>
-
-      <div className="overflow-hidden border-t border-white/10">
-        <div className="font-serif text-[18vw] leading-none whitespace-nowrap text-white/[0.04] select-none py-4">
-          FOODY'S · FLAVOURS OF INDIA · FOODY'S · FLAVOURS OF INDIA ·
+        <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-[11px] text-white/40">
+          <p>© Copyright {new Date().getFullYear()} foodys.com. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <a href="#" className="hover:text-foody-green transition-colors">Privacy policy</a>
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1 hover:text-foody-green transition-colors"
+            >
+              Go to Top
+              <ArrowUp className="size-3" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>

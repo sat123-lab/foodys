@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
  * Floating WhatsApp chat button — fixed bottom-right.
  */
 export const WhatsAppButton = ({
-  phone = "919999999999",
+  phone = "918125025225",
   message = "Hi Foody's, I'd like to know more about your services.",
 }: WhatsAppButtonProps) => {
   const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

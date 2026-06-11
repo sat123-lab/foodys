@@ -8,12 +8,14 @@ export default {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: { "2xl": "1440px" },
+      screens: { "2xl": "1320px" },
     },
     extend: {
       fontFamily: {
-        serif: ['Fraunces', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        body: ['IBM Plex Serif', 'Georgia', 'serif'],
+        heading: ['Montserrat', 'system-ui', 'sans-serif'],
+        serif: ['IBM Plex Serif', 'Georgia', 'serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -49,17 +51,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        ink: {
-          DEFAULT: "hsl(var(--ink))",
-          foreground: "hsl(var(--ink-foreground))",
+        foody: {
+          green: "hsl(var(--foody-green))",
+          "green-light": "hsl(var(--foody-green-light))",
+          "green-dark": "hsl(var(--foody-green-dark))",
+          red: "hsl(var(--foody-red))",
+          "red-dark": "hsl(var(--foody-red-dark))",
+          gray: "hsl(var(--foody-gray))",
+          text: "hsl(var(--foody-text))",
         },
-        saffron: "hsl(var(--saffron))",
-        turmeric: "hsl(var(--turmeric))",
-        chili: "hsl(var(--chili))",
-        terracotta: "hsl(var(--terracotta))",
-        cardamom: "hsl(var(--cardamom))",
-        cream: "hsl(var(--cream))",
-        paper: "hsl(var(--paper))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -85,15 +85,20 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "zoom-in": {
+          "0%": { opacity: "0", transform: "scale(0.85)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.6s var(--ease-out-expo)",
+        "fade-in-up": "fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "zoom-in": "zoom-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
     },
   },

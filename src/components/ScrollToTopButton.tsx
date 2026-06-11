@@ -37,7 +37,7 @@ export const ScrollToTopButton = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.92 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="fixed bottom-24 right-6 z-40 flex items-center justify-center size-12 rounded-full bg-ink text-ink-foreground border border-terracotta/40 shadow-warm hover:bg-terracotta transition-colors"
+          className="fixed bottom-24 right-6 z-40 flex items-center justify-center size-12 rounded-full bg-foody-green text-white shadow-lg hover:bg-foody-green-dark transition-colors"
         >
           <ArrowUp className="size-5" />
         </motion.button>

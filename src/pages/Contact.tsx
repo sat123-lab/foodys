@@ -1,121 +1,120 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
-import { toast } from "sonner";
-import bgContact from "@/assets/bg-contact.mp4.asset.json";
+import { contactInfo } from "@/data/contact";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
-const Contact = () => {
-  const [submitting, setSubmitting] = useState(false);
+const Contact = () => (
+  <>
+    <PageHeader title="Contact" description="Questions? Let's talk!" />
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast.success("Thanks — we'll be in touch within 48 hours.");
-      (e.target as HTMLFormElement).reset();
-    }, 800);
-  };
-
-  return (
-    <>
-      <PageHeader
-        videoSrc={bgContact.url}
-        overlayClassName="bg-paper/80"
-        title={
-          <>
-            Let's cook <span className="italic font-light text-terracotta">something together.</span>
-          </>
-        }
-        description="Concession enquiries, brand partnerships, supplier proposals or press — drop us a line."
-      />
-
-      <section className="py-24 bg-paper grain">
-        <div className="container grid md:grid-cols-12 gap-16">
+    <section className="py-14 md:py-20 bg-foody-gray/50">
+      <div className="container max-w-5xl">
+        <div className="grid sm:grid-cols-2 gap-6 mb-6">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="md:col-span-5 space-y-10"
+            className="rounded-2xl border border-border/60 bg-white p-8 shadow-sm"
           >
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-terracotta mb-3">Headquarters</p>
-              <p className="font-serif text-2xl leading-snug">
-                Foody's Hospitality Pvt. Ltd.<br />
-                Banjara Hills, Road No. 12<br />
-                Hyderabad, Telangana 500034
-              </p>
+            <div className="flex items-center gap-4 mb-5">
+              <div className="size-12 rounded-full bg-foody-red/10 flex items-center justify-center">
+                <Mail className="size-5 text-foody-red" />
+              </div>
+              <h3 className="text-lg font-bold">Mail</h3>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-terracotta mb-3">General</p>
-              <a href="mailto:hello@foodys.com" className="font-serif text-3xl text-ink hover:text-terracotta transition-colors">
-                hello@foodys.com
-              </a>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-terracotta mb-3">Partnerships</p>
-              <a href="mailto:partners@foodys.com" className="font-serif text-3xl text-ink hover:text-terracotta transition-colors">
-                partners@foodys.com
-              </a>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-terracotta mb-3">Phone</p>
-              <a href="tel:+914012345678" className="font-serif text-3xl text-ink hover:text-terracotta transition-colors">
-                +91 40 1234 5678
-              </a>
-            </div>
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="text-muted-foreground hover:text-foody-red transition-colors"
+            >
+              {contactInfo.email}
+            </a>
           </motion.div>
 
-          <motion.form
-            onSubmit={onSubmit}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="md:col-span-7 space-y-6"
+            transition={{ delay: 0.08 }}
+            className="rounded-2xl border border-border/60 bg-white p-8 shadow-sm"
           >
-            {[
-              { name: "name", label: "Your name", type: "text" },
-              { name: "email", label: "Email", type: "email" },
-              { name: "company", label: "Company / Organisation", type: "text" },
-            ].map((f) => (
-              <div key={f.name}>
-                <label className="text-xs uppercase tracking-[0.25em] text-muted-foreground block mb-3">
-                  {f.label}
-                </label>
-                <input
-                  type={f.type}
-                  name={f.name}
-                  required
-                  className="w-full bg-transparent border-b border-ink/20 focus:border-terracotta py-3 text-lg outline-none transition-colors font-serif"
-                />
+            <div className="flex items-center gap-4 mb-5">
+              <div className="size-12 rounded-full bg-foody-red/10 flex items-center justify-center">
+                <MapPin className="size-5 text-foody-red" />
+              </div>
+              <h3 className="text-lg font-bold">Corporate Office</h3>
+            </div>
+            <address className="not-italic text-muted-foreground leading-relaxed text-sm">
+              {contactInfo.company}
+              <br />
+              {contactInfo.address.line1}
+              <br />
+              {contactInfo.address.line2}
+            </address>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.12 }}
+          className="rounded-2xl border border-border/60 bg-white p-8 shadow-sm mb-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="size-12 rounded-full bg-foody-red/10 flex items-center justify-center">
+              <MessageCircle className="size-5 text-foody-red" />
+            </div>
+            <h3 className="text-lg font-bold">Bulk Orders</h3>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {contactInfo.bulkOrders.map((office) => (
+              <div
+                key={office.city}
+                className="rounded-xl bg-foody-gray/50 border border-border/40 p-5"
+              >
+                <p className="font-semibold text-foreground mb-3">{office.city}</p>
+                <a
+                  href={`mailto:${office.email}`}
+                  className="text-sm text-muted-foreground hover:text-foody-red transition-colors block mb-1"
+                >
+                  {office.email}
+                </a>
+                <a
+                  href={`tel:${office.tel}`}
+                  className="text-sm text-muted-foreground hover:text-foody-red transition-colors block"
+                >
+                  {office.phone}
+                </a>
               </div>
             ))}
-            <div>
-              <label className="text-xs uppercase tracking-[0.25em] text-muted-foreground block mb-3">
-                Tell us more
-              </label>
-              <textarea
-                name="message"
-                rows={5}
-                required
-                className="w-full bg-transparent border-b border-ink/20 focus:border-terracotta py-3 text-lg outline-none transition-colors font-serif resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={submitting}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-ink text-ink-foreground hover:bg-terracotta transition-colors duration-300 disabled:opacity-60"
-            >
-              <span className="tracking-wide">{submitting ? "Sending..." : "Send message"}</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </button>
-          </motion.form>
-        </div>
-      </section>
-    </>
-  );
-};
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap gap-4 justify-center"
+        >
+          <a
+            href={`tel:${contactInfo.bulkOrders[0].tel}`}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-foody-red text-white rounded-full text-sm font-medium hover:bg-foody-red-dark transition-colors"
+          >
+            <Phone className="size-4" />
+            Call Us
+          </a>
+          <a
+            href={`mailto:${contactInfo.email}`}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-foody-green text-white rounded-full text-sm font-medium hover:bg-foody-green-dark transition-colors"
+          >
+            <Mail className="size-4" />
+            Email Us
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  </>
+);
 
 export default Contact;

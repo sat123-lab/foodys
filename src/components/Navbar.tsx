@@ -5,11 +5,38 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "./Logo";
 import { ContactPopup } from "./ContactPopup";
 
+type NavChild = { to: string; label: string; external?: boolean };
+
 type NavItem = {
   to: string;
   label: string;
-  children?: { to: string; label: string }[];
+  children?: NavChild[];
 };
+
+const NavChildLink = ({
+  child,
+  className,
+  onClick,
+}: {
+  child: NavChild;
+  className: string;
+  onClick?: () => void;
+}) =>
+  child.external ? (
+    <a
+      href={child.to}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      onClick={onClick}
+    >
+      {child.label}
+    </a>
+  ) : (
+    <Link to={child.to} className={className} onClick={onClick}>
+      {child.label}
+    </Link>
+  );
 
 const links: NavItem[] = [
   { to: "/", label: "Home" },
@@ -17,15 +44,18 @@ const links: NavItem[] = [
     to: "/about",
     label: "About Foody's",
     children: [
-      { to: "/about#about-us", label: "About Us" },
       { to: "/about#growth", label: "Our Growth Story" },
-      { to: "/about#founder", label: "Founder's Story" },
+      { to: "/about#founder", label: "Our Founder's Story" },
       { to: "/about#team", label: "Our Team" },
     ],
   },
   {
     to: "/partners",
     label: "Our Partners",
+    children: [
+      { to: "/partners#fb", label: "F&B Partners" },
+      { to: "/partners#corporate", label: "Corporate Partners" },
+    ],
   },
   {
     to: "/verticals",
@@ -34,9 +64,10 @@ const links: NavItem[] = [
       { to: "/verticals#airports", label: "Foody's at Airports" },
       { to: "/verticals#highways", label: "Foody's at Highways" },
       { to: "/verticals#metros", label: "Foody's at Metros" },
+      { to: "https://andhradosaco.com/", label: "AndhraDosaCo(ADC)", external: true },
     ],
   },
-  ];
+];
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -44,9 +75,11 @@ export const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [contactPopupOpen, setContactPopupOpen] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
+  const lightNav = isHome && !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -60,29 +93,58 @@ export const Navbar = () => {
   return (
     <>
       <motion.header
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-background/85 backdrop-blur-xl border-b border-border/60 py-1"
-            : "bg-background/40 backdrop-blur-sm py-2"
-        }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className="container flex items-center justify-between">
+        <motion.div
+          animate={{
+            paddingTop: scrolled ? 10 : 14,
+            paddingBottom: scrolled ? 10 : 14,
+          }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="relative"
+        >
+          <motion.div
+            className="absolute inset-0 -z-10 border-b"
+            animate={{
+              backgroundColor: lightNav
+                ? "rgba(255, 255, 255, 0)"
+                : scrolled
+                  ? "rgba(255, 255, 255, 0.94)"
+                  : "rgba(255, 255, 255, 0.82)",
+              borderColor: lightNav ? "rgba(255, 255, 255, 0)" : "rgba(0, 0, 0, 0.05)",
+              boxShadow: lightNav
+                ? "0 0 0 rgba(0,0,0,0)"
+                : scrolled
+                  ? "0 8px 32px rgba(0, 0, 0, 0.06)"
+                  : "0 2px 12px rgba(0, 0, 0, 0.03)",
+            }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            style={{ backdropFilter: lightNav ? "blur(0px)" : "blur(16px)" }}
+          />
+
+        <div className="container flex items-center justify-between gap-4">
           <Link to="/" aria-label="Foody's home">
             <Logo />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0.5">
             {links.map((l) => (
               <div key={l.to} className="relative group">
                 <NavLink
                   to={l.to}
                   end={l.to === "/"}
                   className={({ isActive }) =>
-                    `relative inline-flex items-center gap-1 px-4 py-2 text-sm tracking-wide transition-colors ${
-                      isActive ? "text-terracotta" : "text-ink hover:text-terracotta"
+                    `relative inline-flex items-center gap-1 px-4 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ease-out ${
+                      lightNav
+                        ? isActive
+                          ? "text-white"
+                          : "text-white/85 hover:text-white hover:bg-white/10"
+                        : isActive
+                          ? "text-foody-red bg-foody-red/5"
+                          : "text-foreground/75 hover:text-foody-red hover:bg-foody-gray/60"
                     }`
                   }
                 >
@@ -90,13 +152,13 @@ export const Navbar = () => {
                     <>
                       {l.label}
                       {l.children && (
-                        <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />
+                        <ChevronDown className="size-3.5 opacity-70 transition-transform duration-300 group-hover:rotate-180" />
                       )}
                       {isActive && (
                         <motion.span
                           layoutId="nav-underline"
-                          className="absolute left-4 right-4 -bottom-0.5 h-px bg-terracotta"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          className="absolute left-4 right-4 -bottom-0.5 h-0.5 bg-foody-red rounded-full"
+                          transition={{ type: "spring", stiffness: 260, damping: 28 }}
                         />
                       )}
                     </>
@@ -104,26 +166,16 @@ export const Navbar = () => {
                 </NavLink>
 
                 {l.children && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out z-50">
-                    <div className="relative min-w-[280px] rounded-2xl bg-background/95 backdrop-blur-xl border border-terracotta/20 shadow-[0_20px_60px_-15px_rgba(60,20,5,0.35)] overflow-hidden">
-                      {/* Decorative top accent */}
-                      <div className="h-1 w-full bg-gradient-spice" />
-                      {/* Tiny arrow */}
-                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 size-3 rotate-45 bg-gradient-to-br from-terracotta to-saffron" />
-                      <div className="py-3">
-                        {l.children.map((c, idx) => (
-                          <Link
-                            key={c.to}
-                            to={c.to}
-                            className="group/item flex items-center gap-3 px-5 py-2.5 text-sm text-ink hover:bg-cream/60 transition-all duration-300"
-                          >
-                            <span className="flex-1 group-hover/item:text-terracotta group-hover/item:translate-x-1 transition-all">
-                              {c.label}
-                            </span>
-                            <span className="opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all text-terracotta">
-                              →
-                            </span>
-                          </Link>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible translate-y-3 scale-95 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 pointer-events-none group-hover:pointer-events-auto">
+                    <div className="min-w-[260px] rounded-2xl bg-white/98 border border-border/60 shadow-[0_16px_40px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-xl">
+                      <div className="h-1 w-full bg-gradient-to-r from-foody-green to-foody-green/60" />
+                      <div className="py-2">
+                        {l.children.map((c) => (
+                          <NavChildLink
+                            key={c.to + c.label}
+                            child={c}
+                            className="block px-5 py-2.5 text-sm text-foreground/80 hover:bg-foody-gray/80 hover:text-foody-green transition-all duration-300 ease-out"
+                          />
                         ))}
                       </div>
                     </div>
@@ -133,46 +185,51 @@ export const Navbar = () => {
             ))}
           </nav>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
             onClick={() => setContactPopupOpen(true)}
-            className="hidden lg:inline-flex group items-center gap-2 px-5 py-2.5 text-sm bg-terracotta text-white hover:bg-ink rounded-full transition-colors duration-300"
+            className="hidden lg:inline-flex btn-foody !px-6 !py-2.5 text-sm shadow-md hover:shadow-lg transition-shadow duration-300"
           >
-            <span>Contact us</span>
-          </button>
+            Contact us
+          </motion.button>
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden p-2 text-ink"
+            className={`lg:hidden p-2 ${lightNav ? "text-white" : "text-foreground"}`}
             aria-label="Toggle menu"
           >
             {open ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
+        </motion.div>
       </motion.header>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden bg-ink text-ink-foreground overflow-y-auto"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 lg:hidden bg-foody-green text-white overflow-y-auto"
           >
-            <div className="container pt-24 pb-12 min-h-full flex flex-col">
+            <div className="container pt-28 pb-12 min-h-full flex flex-col">
               <nav className="flex flex-col gap-1">
                 {links.map((l, i) => (
                   <motion.div
                     key={l.to}
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.08 + i * 0.05 }}
-                    className="border-b border-white/10"
+                    transition={{ delay: 0.05 + i * 0.05 }}
+                    className="border-b border-white/15"
                   >
                     <div className="flex items-center justify-between">
                       <NavLink
                         to={l.to}
                         end={l.to === "/"}
-                        className="block font-serif text-3xl py-3 hover:text-saffron transition-colors flex-1"
+                        className="block text-2xl font-semibold py-4 hover:text-white/80 transition-colors flex-1"
                       >
                         {l.label}
                       </NavLink>
@@ -185,7 +242,7 @@ export const Navbar = () => {
                           className="p-3"
                         >
                           <ChevronDown
-                            className={`size-5 transition-transform ${
+                            className={`size-5 transition-transform duration-300 ${
                               mobileExpanded === l.to ? "rotate-180" : ""
                             }`}
                           />
@@ -198,17 +255,17 @@ export const Navbar = () => {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden border-l border-white/20 ml-3"
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
                         >
-                          <div className="pb-3 pl-6 flex flex-col gap-0">
+                          <div className="pb-4 pl-4 flex flex-col gap-1">
                             {l.children.map((c) => (
-                              <Link
-                                key={c.to}
-                                to={c.to}
-                                className="text-sm text-white/70 hover:text-saffron py-2 pl-4 transition-all block"
-                              >
-                                {c.label}
-                              </Link>
+                              <NavChildLink
+                                key={c.to + c.label}
+                                child={c}
+                                className="text-sm text-white/70 hover:text-white py-2 transition-colors"
+                                onClick={() => setOpen(false)}
+                              />
                             ))}
                           </div>
                         </motion.div>
@@ -217,17 +274,20 @@ export const Navbar = () => {
                   </motion.div>
                 ))}
               </nav>
-              <div className="mt-auto pt-10 text-sm text-white/60">
-                Hyderabad · Mumbai · Jaipur
-              </div>
+              <button
+                onClick={() => { setOpen(false); setContactPopupOpen(true); }}
+                className="mt-8 btn-foody w-full"
+              >
+                Contact us
+              </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      
-      <ContactPopup 
-        isOpen={contactPopupOpen} 
-        onClose={() => setContactPopupOpen(false)} 
+
+      <ContactPopup
+        isOpen={contactPopupOpen}
+        onClose={() => setContactPopupOpen(false)}
       />
     </>
   );

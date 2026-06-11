@@ -19,7 +19,7 @@ export const CtaBanner = () => {
       <div className="container relative">
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.3em] text-saffron mb-6">Partner with us</p>
-          <h2 className="font-serif text-5xl md:text-7xl leading-[0.95] mb-8 text-balance">
+          <h2 className="text-5xl md:text-7xl leading-[0.95] mb-8 text-balance">
             Bring Foody's to your
             <span className="italic font-light text-saffron"> next destination.</span>
           </h2>

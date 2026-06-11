@@ -4,7 +4,6 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import airport from "@/assets/vertical-airport.jpg";
 import highway from "@/assets/vertical-highway.jpg";
 import metro from "@/assets/vertical-metro.jpg";
-import bgVerticals from "@/assets/bg-verticals.mp4.asset.json";
 
 const verticals = [
   {
@@ -33,13 +32,7 @@ const verticals = [
 const Verticals = () => (
   <>
     <PageHeader
-      videoSrc={bgVerticals.url}
-      overlayClassName="bg-paper/80"
-      title={
-        <>
-          Three networks. <span className="italic font-light text-terracotta">One promise.</span>
-        </>
-      }
+      title="Three networks. One promise."
       description="Wherever Indians are travelling — by air, road or rail — Foody's is there with a hot, honest plate of home."
     />
 
@@ -67,8 +60,8 @@ const Verticals = () => (
               </div>
             </div>
             <div className="md:col-span-6">
-              <p className="font-serif text-sm text-terracotta mb-4">{v.no} / 03</p>
-              <h2 className="font-serif text-6xl md:text-7xl leading-[0.9] mb-6">
+              <p className="font-body text-sm text-terracotta mb-4">{v.no} / 03</p>
+              <h2 className="text-6xl md:text-7xl leading-[0.9] mb-6">
                 {v.title}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">

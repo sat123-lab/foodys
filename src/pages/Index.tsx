@@ -1,16 +1,24 @@
 import { Hero } from "@/components/sections/Hero";
-import { Verticals } from "@/components/sections/Verticals";
-import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
-import { Story } from "@/components/sections/Story";
-import { CtaBanner } from "@/components/sections/CtaBanner";
+import {
+  PartnersSection,
+  WhereWeAreSection,
+} from "@/components/sections/HomeSections";
+import {
+  CtaDualSection,
+  HowWeWorkSection,
+  QuoteSection,
+  BlogSection,
+} from "@/components/sections/MoreSections";
 
 const Index = () => (
   <>
     <Hero />
-    <Verticals />
-    <Story />
-    <PartnersMarquee />
-    <CtaBanner />
+    <PartnersSection />
+    <WhereWeAreSection />
+    <CtaDualSection />
+    <HowWeWorkSection />
+    <QuoteSection />
+    <BlogSection />
   </>
 );
 

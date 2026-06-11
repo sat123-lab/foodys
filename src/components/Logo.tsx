@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/foodys-logo.png";
 
-export const Logo = ({ className = "" }: { className?: string }) => (
+export const Logo = ({ className = "", size = "default" }: { className?: string; size?: "default" | "small" | "footer" }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -9,11 +8,15 @@ export const Logo = ({ className = "" }: { className?: string }) => (
     className={`flex items-center ${className}`}
   >
     <img
-      src={logo}
+      src="/images/website-logo.png"
       alt="Foody's"
-      width={160}
-      height={80}
-      className="h-16 md:h-20 w-auto object-contain"
+      className={`w-auto object-contain ${
+        size === "footer"
+          ? "h-9 md:h-10"
+          : size === "small"
+            ? "h-12 md:h-14"
+            : "h-14 md:h-[72px]"
+      }`}
     />
   </motion.div>
 );

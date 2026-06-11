@@ -23,7 +23,7 @@ export const Story = () => {
         </div>
         <div className="md:col-span-7 md:pl-8">
           <p className="text-xs uppercase tracking-[0.3em] text-terracotta mb-6">Our craft</p>
-          <h2 className="font-serif text-5xl md:text-7xl leading-[0.95] text-balance">
+          <h2 className="text-5xl md:text-7xl leading-[0.95] text-balance">
             Every recipe, a
             <span className="italic font-light text-terracotta"> hand-written </span>
             love letter to a region.
@@ -48,7 +48,7 @@ export const Story = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="font-serif text-4xl text-ink">{s.v}</p>
+                <p className="font-heading text-4xl text-ink">{s.v}</p>
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">{s.k}</p>
               </motion.div>
             ))}

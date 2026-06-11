@@ -34,7 +34,7 @@ export const Verticals = () => {
             <p className="text-xs uppercase tracking-[0.3em] text-terracotta mb-4">Our verticals</p>
           </div>
           <div className="md:col-span-8">
-            <h2 className="font-serif text-5xl md:text-7xl leading-[0.95] text-balance">
+            <h2 className="text-5xl md:text-7xl leading-[0.95] text-balance">
               Local iconic flavours,
               <br />
               <span className="italic font-light text-terracotta">where you least expect them.</span>
@@ -63,11 +63,11 @@ export const Verticals = () => {
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
-                  <div className="absolute top-6 left-6 text-ink-foreground/80 font-serif text-sm">
+                  <div className="absolute top-6 left-6 text-ink-foreground/80 font-body text-sm">
                     {item.no} / 03
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-8 text-ink-foreground">
-                    <h3 className="font-serif text-4xl mb-2">{item.title}</h3>
+                    <h3 className="text-4xl mb-2">{item.title}</h3>
                     <p className="text-sm text-white/80 max-w-xs">{item.desc}</p>
                     <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-saffron opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-500">
                       Discover <span>→</span>
