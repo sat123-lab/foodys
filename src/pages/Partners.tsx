@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { partnerGroups } from "@/data/partners";
+import { corporatePartners, partnerGroups } from "@/data/partners";
 
 const PartnerCard = ({ partner, index }: { partner: (typeof partnerGroups)[0]["partners"][0]; index: number }) => (
   <motion.article
@@ -53,19 +53,30 @@ const Partners = () => (
     </section>
 
     <section id="corporate" className="py-16 md:py-20 bg-foody-gray/40 scroll-mt-24">
-      <div className="container max-w-3xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
+      <div className="container max-w-4xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="text-xl md:text-2xl font-bold text-center mb-10 md:mb-12"
         >
-          <h2 className="text-xl md:text-2xl font-bold mb-4">Corporate Partners</h2>
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Foody's collaborates with leading infrastructure and transport operators to bring
-            iconic food experiences to travellers across India.
-          </p>
-          <p className="text-lg font-semibold text-foody-green">Mumbai Metro</p>
-        </motion.div>
+          Corporate Partners
+        </motion.h2>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12">
+          {corporatePartners.map((partner, i) => (
+            <motion.article
+              key={partner.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="text-center px-4"
+            >
+              <h3 className="text-lg md:text-xl font-bold mb-3 leading-snug">{partner.name}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{partner.desc}</p>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   </>
