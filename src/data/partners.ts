@@ -95,11 +95,19 @@ export const foodPartners: Partner[] = partnerGroups.flatMap((g) => g.partners);
 
 export const corporatePartners: Omit<Partner, "logo">[] = [
   {
-    name: "Mumbai Metro",
-    desc: "A symbol of progress, reliability, and the spirit of Mumbai.",
+    name: "GMR Airport",
+    desc: "Partnering across airport environments to bring convenient, quality food experiences to travellers.",
+  },
+  {
+    name: "Adani Airport",
+    desc: "Collaborating to serve travellers with trusted food options across modern airport destinations.",
   },
   {
     name: "Bharat Petroleum",
-    desc: "Together with Bharat Petroleum, Foody's brings comfort and cuisine to highway traveller.",
+    desc: "Together with Bharat Petroleum, Foody's brings comfort and cuisine to highway travellers.",
+  },
+  {
+    name: "Reliance Mumbai Metro",
+    desc: "A symbol of progress, reliability, and the spirit of Mumbai's daily commute.",
   },
 ];
